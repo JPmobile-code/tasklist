@@ -7,12 +7,12 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
 type Props = {
-    atividade: string;
+    tarefa: string;
     onRemove: () => void;
 }
 
 
-export function Tarefas ( {atividade , onRemove } : Props ){
+export function Tarefas ( {tarefa , onRemove } : Props ){
     const [isChecked, setIsChecked] = useState(false);
 
     function handleCheckBoxChange(){
@@ -26,7 +26,7 @@ export function Tarefas ( {atividade , onRemove } : Props ){
             </TouchableOpacity>
     
             <Text style={styles.tarefaText}> 
-                {atividade}
+                {tarefa}
             </Text>
 
             <TouchableOpacity style={styles.buttonTrash}  onPress={ onRemove }>

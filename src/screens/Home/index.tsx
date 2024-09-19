@@ -1,15 +1,23 @@
 import { StatusBar } from 'expo-status-bar';
-import { Text, View, TextInput, TouchableOpacity} from 'react-native';
+import { Text, View, TextInput, TouchableOpacity, ScrollView} from 'react-native';
 import { styles } from './style';
 import { Tarefas } from '../../components/tarefas';
+import { useState } from 'react';
+
 
 export default function Home() {
 
+    const [ atividade, setAtividade] = useState<string[]>([])
+    const [atividadeText, setAtividadeText] = useState('')
+
     function toqueButtonAdd(){
-        console.log('voce clicou no butao +');
+        if (setAtividadeText.includes = '')
+        
+        setAtividade(prevState => [...prevState, atividadeText]);
+        setAtividadeText('');
     } 
-    function handleTarefaRemove(atividadeType:string){
-        console.log(`clicou na lixeirinha para eliminar a tarefa: ${atividadeType} da sua lista`);
+    function handleTarefaRemove(){
+        console.log('vc clicou em remover')
     }  
     return (
         <View style={styles.container}>
@@ -19,30 +27,30 @@ export default function Home() {
             <Text style={styles.containerTextSub}>
                 List
             </Text>
-            <StatusBar style="auto" 
-            />
 
             <View style={styles.adicionarTarefa}>
                 <TextInput style={styles.textInput} 
                 placeholder='Digite sua nova tarefa'
                 placeholderTextColor={'#9caaafba'}
-                />
+                onChangeText={setAtividadeText}
+                value={atividadeText}/>
 
                 <TouchableOpacity style={styles.button} onPress={toqueButtonAdd}>
                     <Text style={styles.textButton}>+</Text>
                 </TouchableOpacity>
             </View>
-            <Tarefas atividade ='Limpar casa' onRemove={() => handleTarefaRemove ('Limpar casa')}/>
-            <Tarefas atividade ='Lavar Carro' onRemove={() => handleTarefaRemove ('Lavar Carro')}/>
-            <Tarefas atividade ='Estudar' onRemove={() => handleTarefaRemove ('Estudar')}/> 
-            <Tarefas atividade ='Lavar Roupa' onRemove={() => handleTarefaRemove ('Lavar Roupa')}/>
-            <Tarefas atividade ='Cuidar do cachorro' onRemove={() => handleTarefaRemove ('Cuidar do cachorro')}/>
-            <Tarefas atividade ='Faculdade' onRemove={() => handleTarefaRemove ('Faculdade')}/>
-            <Tarefas atividade ='Aula de ingles' onRemove={() => handleTarefaRemove ('Aula de ingles')}/>
 
 
+            <ScrollView showsVerticalScrollIndicator = {false}>
+                {atividade.map((tarefa, index) => (
+                    <Tarefas
+                        key={index}
+                        tarefa={tarefa}
+                        onRemove={() => handleTarefaRemove()} 
+                    />
+                ))}    
+            </ScrollView>
             
-
 
         </View>
 
